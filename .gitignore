@@ -1,0 +1,12 @@
+target/
+**/target/
+.idea/
+*.iml
+.classpath
+.project
+node_modules/
+frontend/node_modules/
+backend/target/
+.env
+.DS_Store
+uploads/
