@@ -3,22 +3,22 @@
    ============================================ */
 
 :root {
-  /* Brand palette: deep navy + warm gold accent + neutrals */
-  --navy: #0f2942;
-  --navy-700: #163653;
-  --ink: #14202e;
-  --slate: #5b6b7c;
-  --muted: #8595a4;
-  --line: #e6ebf0;
-  --line-soft: #eef2f6;
+  /* Brand palette: earthy brown + natural greens (matched to logo) + warm neutrals */
+  --navy: #66401a;          /* primary brown */
+  --navy-700: #523316;      /* deeper brown */
+  --ink: #2b2017;           /* warm near-black */
+  --slate: #6f6357;         /* muted warm gray */
+  --muted: #9a8d7e;
+  --line: #e9e3da;
+  --line-soft: #f1ece4;
   --surface: #ffffff;
-  --bg: #f6f8fa;
-  --bg-tint: #eef3f7;
-  --gold: #c89b3c;
-  --gold-dark: #a67f28;
-  --gold-soft: #f7efdc;
-  --success: #1f8a52;
-  --success-soft: #e3f4ea;
+  --bg: #faf7f2;            /* warm off-white */
+  --bg-tint: #f0ebe3;
+  --gold: #5aa916;          /* bright leaf green accent */
+  --gold-dark: #1e7822;     /* deep leaf green */
+  --gold-soft: #e7f3da;
+  --success: #1e7822;
+  --success-soft: #e3f4e2;
   --danger: #c0392b;
   --danger-soft: #fae6e3;
   --whatsapp: #25d366;
@@ -27,9 +27,9 @@
   --radius: 14px;
   --radius-lg: 20px;
 
-  --shadow-sm: 0 1px 2px rgba(15, 41, 66, 0.06), 0 1px 3px rgba(15, 41, 66, 0.05);
-  --shadow: 0 6px 20px rgba(15, 41, 66, 0.08);
-  --shadow-lg: 0 18px 50px rgba(15, 41, 66, 0.14);
+  --shadow-sm: 0 1px 2px rgba(102, 64, 26, 0.06), 0 1px 3px rgba(102, 64, 26, 0.05);
+  --shadow: 0 6px 20px rgba(102, 64, 26, 0.1);
+  --shadow-lg: 0 18px 50px rgba(102, 64, 26, 0.16);
 
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-serif: 'Fraunces', Georgia, 'Times New Roman', serif;
@@ -69,8 +69,8 @@ a {
 .site-header {
   position: relative;
   background:
-    radial-gradient(120% 140% at 85% -20%, rgba(200, 155, 60, 0.22) 0%, rgba(200, 155, 60, 0) 55%),
-    linear-gradient(160deg, var(--navy) 0%, #0a1f33 100%);
+    radial-gradient(120% 140% at 85% -20%, rgba(90, 169, 22, 0.22) 0%, rgba(90, 169, 22, 0) 55%),
+    linear-gradient(160deg, var(--navy) 0%, #4a2e12 100%);
   color: #fff;
   overflow: hidden;
 }
@@ -108,15 +108,23 @@ a {
 }
 
 .brand-mark {
-  width: 44px;
-  height: 44px;
+  width: 46px;
+  height: 46px;
   border-radius: 12px;
   display: grid;
   place-items: center;
-  background: linear-gradient(150deg, var(--gold) 0%, var(--gold-dark) 100%);
-  color: var(--navy);
-  box-shadow: 0 6px 18px rgba(200, 155, 60, 0.35);
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.22);
   flex-shrink: 0;
+}
+
+.brand-mark img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
 }
 
 .brand-name {
@@ -591,7 +599,7 @@ main {
 }
 
 .price-box {
-  background: linear-gradient(150deg, var(--navy) 0%, #0a1f33 100%);
+  background: linear-gradient(150deg, var(--navy) 0%, #4a2e12 100%);
   border-color: transparent;
 }
 

@@ -3,16 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import axios from 'axios'
 import ListingCard from './components/ListingCard'
 import ListingDetail from './components/ListingDetail'
-
-function BrandLogo() {
-  return (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <path d="M3 21h18" />
-      <path d="M5 21V8l7-5 7 5v13" />
-      <path d="M9 21v-6h6v6" />
-    </svg>
-  )
-}
+import logo from './assets/logo.png'
 
 function Home() {
   const [listings, setListings] = useState([])
@@ -36,7 +27,7 @@ function Home() {
         <div className="header-inner">
           <div className="brand-row">
             <div className="brand">
-              <span className="brand-mark"><BrandLogo /></span>
+              <span className="brand-mark"><img src={logo} alt="Balaji Real Estate logo" width="46" height="46" /></span>
               <span>
                 <span className="brand-name">Balaji Real Estate</span>
                 <span className="brand-sub" style={{ display: 'block' }}>Coimbatore</span>
@@ -99,7 +90,7 @@ function Home() {
       <footer className="site-footer">
         <div className="footer-inner">
           <div className="footer-brand">
-            <span className="brand-mark"><BrandLogo /></span>
+            <span className="brand-mark"><img src={logo} alt="Balaji Real Estate logo" width="46" height="46" /></span>
             <span className="brand-name">Balaji Real Estate</span>
           </div>
           <p>&copy; {new Date().getFullYear()} Balaji Real Estate. All rights reserved.</p>
