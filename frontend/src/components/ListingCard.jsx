@@ -11,6 +11,11 @@ export default function ListingCard({ listing }) {
     <article className="card">
       <div className="card-image">
         <img src={firstPhoto} alt={listing.title} />
+        {listing.status && (
+          <div className="status-badge">
+            <span className={`badge ${listing.status}`}>{listing.status.toUpperCase()}</span>
+          </div>
+        )}
       </div>
       
       <div className="card-content">

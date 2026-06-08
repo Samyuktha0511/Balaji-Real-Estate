@@ -1,4 +1,11 @@
 /* Global Styles */
+:root {
+  --primary: #2b7a78;
+  --primary-dark: #1f5753;
+  --bg-light: #f5f5f5;
+  --text-dark: #333;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -7,19 +14,17 @@ body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
   padding: 0;
-  background: #f5f5f5;
-  color: #333;
 }
 
 .container {
-  max-width: 1200px;
+  max-width: 1280px;
   margin: 0 auto;
   padding: 20px;
 }
 
 /* Header */
 header {
-  background: linear-gradient(135deg, #2b7a78 0%, #1f5753 100%);
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
   color: #fff;
   padding: 40px 20px;
   border-radius: 8px;
@@ -29,8 +34,6 @@ header {
 
 header h1 {
   margin: 0;
-  font-size: 2.5em;
-  font-weight: bold;
 }
 
 header p {
@@ -162,13 +165,13 @@ main {
 }
 
 .btn-primary {
-  background: #2b7a78;
+  background: var(--primary);
   color: #fff;
   width: 100%;
 }
 
 .btn-primary:hover {
-  background: #1f5753;
+  background: var(--primary-dark);
 }
 
 .btn-call {
@@ -206,14 +209,7 @@ main {
   width: auto;
   padding: 8px 12px;
   font-size: 1.2em;
-  background: #f0f0f0;
-  color: #333;
-  margin-right: 6px;
-}
-
-.btn-contact:hover {
-  background: #2b7a78;
-  color: #fff;
+  /* Legacy styles removed - handled by modern-ui.css */
 }
 
 /* Contact Section */
@@ -254,6 +250,7 @@ main {
 .detail-photos {
   display: flex;
   flex-direction: column;
+  position: relative; /* This keeps the status-badge inside the photo area */
 }
 
 .detail-info h1 {
@@ -373,7 +370,10 @@ main {
 
 /* Status Badge */
 .status-badge {
-  margin-top: 20px;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 5;
 }
 
 .badge {

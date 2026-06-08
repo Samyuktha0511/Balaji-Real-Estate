@@ -46,6 +46,11 @@ export default function ListingDetail() {
       <div className="detail-wrapper">
         {/* Left: Photo Gallery */}
         <div className="detail-photos">
+          {listing.status && (
+            <div className="status-badge">
+              <span className={`badge ${listing.status}`}>{listing.status.toUpperCase()}</span>
+            </div>
+          )}
           <PhotoGallery photos={listing.photos} title={listing.title} />
         </div>
 
@@ -70,40 +75,25 @@ export default function ListingDetail() {
             <p>{listing.description}</p>
           </div>
 
-          {/* Contact Section */}
           <div className="contact-section">
             <h3>Contact</h3>
-            <div className="contact-details">
-              {listing.phone && (
-                <div className="contact-item">
-                  <span>Phone:</span>
-                  <a href={`tel:${listing.phone}`}>{listing.phone}</a>
-                </div>
-              )}
-              {listing.email && (
-                <div className="contact-item">
-                  <span>Email:</span>
-                  <a href={`mailto:${listing.email}`}>{listing.email}</a>
-                </div>
-              )}
-            </div>
-
             <div className="contact-buttons">
               {listing.phone && (
                 <>
-                  <a className="btn btn-call" href={`tel:${listing.phone}`}>📞 Call Now</a>
-                  <a className="btn btn-whatsapp" href={`https://wa.me/${listing.phone.replace(/\D/g,'')}?text=Hi, I'm interested in ${listing.title}`} target="_blank" rel="noreferrer">💬 WhatsApp</a>
+                  <a className="btn btn-call" href={`tel:${listing.phone}`}>
+                    📞 Call Now
+                  </a>
+                  <a className="btn btn-whatsapp" href={`https://wa.me/${listing.phone.replace(/\D/g,'')}?text=Hi, I'm interested in ${listing.title}`} target="_blank" rel="noreferrer">
+                    💬 WhatsApp
+                  </a>
                 </>
               )}
-              {listing.email && <a className="btn btn-email" href={`mailto:${listing.email}?subject=Interested in ${listing.title}`}>✉ Email</a>}
+              {listing.email && (
+                <a className="btn btn-email" href={`mailto:${listing.email}?subject=Interested in ${listing.title}`}>
+                  ✉ Email
+                </a>
+              )}
             </div>
-          </div>
-
-          {/* Status */}
-          <div className="status-badge">
-            <span className={`badge ${listing.status === 'available' ? 'available' : 'sold'}`}>
-              {listing.status ? listing.status.toUpperCase() : 'AVAILABLE'}
-            </span>
           </div>
         </div>
       </div>
