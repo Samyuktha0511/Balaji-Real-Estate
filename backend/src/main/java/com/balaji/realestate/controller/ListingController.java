@@ -5,6 +5,8 @@ import com.balaji.realestate.repository.ListingRepository;
 import com.balaji.realestate.service.FileStorageService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -57,13 +59,18 @@ public class ListingController {
     }
 
     @GetMapping("/media/{filename}")
-    public ResponseEntity<byte[]> serveMedia(@PathVariable String filename) throws IOException {
+    public ResponseEntity<Resource> serveMedia(@PathVariable String filename) throws IOException {
         File f = storageService.loadFile(filename);
         if (!f.exists()) return ResponseEntity.notFound().build();
-        byte[] bytes = Files.readAllBytes(f.toPath());
+
+        Resource resource = new FileSystemResource(f);
+        String contentType = Files.probeContentType(f.toPath());
+        
         HttpHeaders headers = new HttpHeaders();
-        String ct = Files.probeContentType(f.toPath());
-        headers.setContentType(MediaType.parseMediaType(ct == null ? "application/octet-stream" : ct));
-        return new ResponseEntity<>(bytes, headers, HttpStatus.OK);
+        headers.add(HttpHeaders.CONTENT_TYPE, contentType != null ? contentType : "application/octet-stream");
+
+        return ResponseEntity.ok()
+                .headers(headers)
+                .body(resource);
     }
 }

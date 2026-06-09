@@ -100,6 +100,11 @@ export default function ListingDetail() {
       <div className="detail-wrapper">
         {/* Left: Photo Gallery */}
         <div className="detail-photos">
+          {listing.status && (
+            <div className="status-badge">
+              <span className={`badge ${listing.status}`}>{listing.status.toUpperCase()}</span>
+            </div>
+          )}
           <PhotoGallery photos={listing.photos} title={listing.title} />
         </div>
 
@@ -124,7 +129,6 @@ export default function ListingDetail() {
             <p>{listing.description}</p>
           </div>
 
-          {/* Contact Section */}
           <div className="contact-section">
             <h3>Contact</h3>
             <div className="contact-details">
@@ -151,13 +155,6 @@ export default function ListingDetail() {
               )}
               {listing.email && <a className="btn btn-email" href={`mailto:${listing.email}?subject=Interested in ${listing.title}`}><MailIcon /> Email</a>}
             </div>
-          </div>
-
-          {/* Status */}
-          <div className="status-badge">
-            <span className={`badge ${listing.status === 'available' ? 'available' : 'sold'}`}>
-              {listing.status ? listing.status.toUpperCase() : 'AVAILABLE'}
-            </span>
           </div>
         </div>
       </div>

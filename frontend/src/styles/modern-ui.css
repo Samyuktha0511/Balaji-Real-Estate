@@ -1,0 +1,122 @@
+:root {
+  --brand-brown: #66401a;
+  --brand-green-dark: #1e7822;
+  --brand-green-light: #5aa916;
+  
+  --primary: var(--brand-green-dark);
+  --primary-hover: var(--brand-green-light);
+  --secondary: var(--brand-brown);
+  
+  --bg-page: #faf9f6; /* Warm off-white */
+  --bg-card: #ffffff;
+  --text-main: #2d241c;
+  --text-muted: #6b7280;
+  
+  --radius-lg: 20px;
+  --radius-md: 12px;
+  --shadow-premium: 0 20px 40px -15px rgba(102, 64, 26, 0.1);
+}
+
+body {
+  background-color: var(--bg-page);
+  color: var(--text-main);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+/* Refined Navbar-style Header */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 5%;
+  background: white;
+  box-shadow: 0 2px 15px rgba(0,0,0,0.03);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  text-decoration: none;
+}
+
+.logo-text {
+  font-weight: 800;
+  font-size: 1.4rem;
+  color: var(--brand-brown);
+  letter-spacing: -0.5px;
+}
+
+/* Hero Section */
+.hero {
+  padding: 80px 20px;
+  text-align: center;
+  background: linear-gradient(180deg, white 0%, var(--bg-page) 100%);
+}
+
+.hero h1 {
+  font-size: 3.5rem;
+  font-weight: 900;
+  color: var(--brand-brown);
+  margin-bottom: 15px;
+}
+
+/* Listing Cards */
+.card {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-premium);
+  border: 1px solid rgba(102, 64, 26, 0.05);
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 30px 60px -20px rgba(102, 64, 26, 0.15);
+}
+
+.card-image-container {
+  position: relative;
+  height: 220px;
+}
+
+.status-badge {
+  position: absolute;
+  top: 15px; left: 15px;
+  padding: 6px 14px;
+  background: white;
+  border-radius: 50px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.status-badge.available { color: var(--brand-green-dark); }
+.status-badge.sold { color: #ef4444; }
+
+.card-title { color: var(--brand-brown) !important; font-size: 1.3rem !important; }
+
+.card-stats {
+  background: #fdfbf7;
+  border: 1px solid #f3f0e9;
+}
+
+.stat .value { color: var(--brand-green-dark) !important; }
+
+.btn-primary {
+  background: var(--brand-green-dark) !important;
+  border-radius: var(--radius-md) !important;
+  transition: background 0.3s;
+}
+
+.btn-primary:hover {
+  background: var(--brand-green-light) !important;
+}
+
+.btn-contact:hover {
+  background: var(--brand-brown) !important;
+}
