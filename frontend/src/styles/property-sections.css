@@ -1,0 +1,73 @@
+/* ============================================
+   Location & Documents
+   ============================================ */
+
+.location-section,
+.documents-section {
+  background: var(--surface);
+  padding: 28px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 30px;
+}
+
+.location-section h2,
+.documents-section h2 {
+  margin: 0 0 8px;
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.coordinates {
+  margin: 0 0 18px;
+  color: var(--muted);
+  font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+  font-size: 0.85rem;
+}
+
+.location-section iframe {
+  width: 100%;
+  min-height: 400px;
+  border-radius: var(--radius) !important;
+}
+
+.documents-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.documents-list li {
+  padding: 0;
+}
+
+.documents-list a {
+  color: var(--navy);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  transition: all 0.22s ease;
+}
+
+.documents-list a svg {
+  color: var(--gold-dark);
+  flex-shrink: 0;
+}
+
+.documents-list a:hover {
+  border-color: var(--navy);
+  background: var(--bg-tint);
+  transform: translateX(3px);
+}

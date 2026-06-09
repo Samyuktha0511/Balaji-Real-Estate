@@ -1,0 +1,9 @@
+<svg width="640" height="760" viewBox="0 0 640 760" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="640" height="760" fill="#EAF0E2"/>
+  <rect x="36" y="36" width="568" height="688" rx="28" fill="#F8FAF4" stroke="#DDE6D5" stroke-width="2"/>
+  <circle cx="320" cy="262" r="102" fill="#DDE8D2"/>
+  <path d="M164 602C180 500 244 430 320 430C396 430 460 500 476 602" fill="#DDE8D2"/>
+  <path d="M238 596H402" stroke="#A7B69C" stroke-width="16" stroke-linecap="round"/>
+  <path d="M266 638H374" stroke="#C5D1BB" stroke-width="12" stroke-linecap="round"/>
+  <text x="320" y="690" text-anchor="middle" fill="#586256" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="600">Replace with owner's photo</text>
+</svg>

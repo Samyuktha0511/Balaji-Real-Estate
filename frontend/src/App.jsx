@@ -4,6 +4,7 @@ import axios from 'axios'
 import ListingCard from './components/ListingCard'
 import ListingDetail from './components/ListingDetail'
 import logo from './assets/logo.png'
+import fatherPhotoPlaceholder from './assets/father-photo-placeholder.svg'
 
 function Home() {
   const [listings, setListings] = useState([])
@@ -45,7 +46,7 @@ function Home() {
         <div className="hero">
           <span className="hero-eyebrow">Premium Plot Resale</span>
           <h1>Find your perfect plot in Coimbatore</h1>
-          <p>Hand-picked, verified plot resale listings with transparent pricing, real photos and direct owner contact — no middlemen.</p>
+          <p>Hand-picked, verified plot resale listings with real photos, end-to-end support and guidance.</p>
 
           <div className="hero-stats">
             <div className="hero-stat">
@@ -86,6 +87,29 @@ function Home() {
           )}
         </main>
       </div>
+
+      <section className="about-owner" aria-labelledby="about-owner-title">
+        <div className="about-owner-inner">
+          <div className="about-owner-photo">
+            <img src={fatherPhotoPlaceholder} alt="Business owner portrait placeholder" />
+          </div>
+          <div className="about-owner-content">
+            <span className="about-owner-eyebrow">About us</span>
+            <h2 id="about-owner-title">Trusted land guidance built over 23 years</h2>
+            <p>
+              Murugesan K is a seasoned land broker and land promoter with
+              about 23 years of hands-on experience across Coimbatore's land market. His
+              work is rooted in clear guidance, practical local knowledge and long-term
+              relationships with buyers, sellers and land owners.
+            </p>
+            <p>
+              From identifying promising plots to helping families understand location,
+              access and value, he brings a steady, personal approach to every property
+              conversation.
+            </p>
+          </div>
+        </div>
+      </section>
 
       <footer className="site-footer">
         <div className="footer-inner">

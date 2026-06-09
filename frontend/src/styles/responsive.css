@@ -1,0 +1,59 @@
+/* ============================================
+   Responsive
+   ============================================ */
+
+@media (max-width: 860px) {
+  .detail-wrapper {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .about-owner-inner {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .about-owner-photo {
+    max-width: 420px;
+  }
+}
+
+@media (max-width: 768px) {
+  .listings-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .price-area {
+    grid-template-columns: 1fr;
+  }
+
+  .hero {
+    padding: 28px 24px 56px;
+  }
+
+  .hero-stats {
+    gap: 28px;
+  }
+
+  .header-contact span {
+    display: none;
+  }
+
+  .container {
+    padding: 0 16px 48px;
+  }
+
+  .about-owner {
+    padding: 72px 16px 64px;
+  }
+
+  .about-owner-content h2 {
+    max-width: none;
+  }
+
+  .detail-wrapper,
+  .location-section,
+  .documents-section {
+    padding: 20px;
+  }
+}
