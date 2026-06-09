@@ -13,10 +13,10 @@
   box-shadow: var(--shadow);
   margin-bottom: 30px;
 }
-
 .detail-photos {
   display: flex;
   flex-direction: column;
+  position: relative; /* Establish positioning context for absolute children */
 }
 
 .detail-info {
@@ -170,9 +170,11 @@
   gap: 10px;
 }
 
-.status-badge {
-  margin-top: auto;
-  padding-top: 20px;
+/* Positioning for the status badge within the photo gallery */
+.detail-photos > .status-badge {
+  position: absolute;
+  top: 15px; /* Adjust as needed */
+  left: 15px; /* Adjust as needed */
 }
 
 .badge {
