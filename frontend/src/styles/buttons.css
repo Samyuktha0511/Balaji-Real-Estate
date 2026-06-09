@@ -1,0 +1,117 @@
+/* ============================================
+   Buttons
+   ============================================ */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 18px;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.92rem;
+  font-family: var(--font-sans);
+  text-align: center;
+  transition: all 0.22s ease;
+  border: 1px solid transparent;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.btn svg {
+  flex-shrink: 0;
+}
+
+.btn-primary {
+  background: var(--navy);
+  color: #fff;
+  flex: 1;
+}
+
+.btn-primary:hover {
+  background: var(--navy-700);
+  transform: translateY(-1px);
+}
+
+.btn-call {
+  background: var(--success);
+  color: #fff;
+  width: 100%;
+}
+
+.btn-call:hover {
+  background: #196e42;
+}
+
+.btn-whatsapp {
+  background: var(--whatsapp);
+  color: #06351a;
+  width: 100%;
+}
+
+.btn-whatsapp:hover {
+  background: #1fbe5a;
+}
+
+.btn-email {
+  background: var(--surface);
+  color: var(--navy);
+  border-color: var(--line);
+  width: 100%;
+}
+
+.btn-email:hover {
+  border-color: var(--navy);
+  background: var(--bg);
+}
+
+.contacts {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-contact {
+  display: inline-grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  border-radius: 50%;
+  background: var(--bg-tint);
+  color: var(--navy);
+  border: 1px solid var(--line);
+  transition: all 0.22s ease;
+}
+
+.btn-contact:hover {
+  background: var(--navy);
+  color: #fff;
+  border-color: var(--navy);
+  transform: translateY(-2px);
+}
+
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--surface);
+  color: var(--navy);
+  padding: 10px 18px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  font-family: var(--font-sans);
+  margin: 28px 0 24px;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.22s ease;
+}
+
+.back-btn:hover {
+  background: var(--navy);
+  color: #fff;
+  transform: translateX(-3px);
+}
