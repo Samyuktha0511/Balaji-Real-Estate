@@ -11,5 +11,17 @@ spring:
         format_sql: true
 server:
   port: 8080
-file:
-  upload-dir: ${UPLOAD_DIR:uploads}
+# file:
+#   upload-dir: ${UPLOAD_DIR:uploads}
+cloud:
+  aws:
+    s3:
+      endpoint: https://ee825d5c9fbbf9b9920eebe4d8e8f962.r2.cloudflarestorage.com
+      bucket-name: bre-listing-detail-img 
+    credentials:
+      access-key: 50ed4771979468e1b24e6fb02b6a47d8
+      secret-key: 611a26fa8c95e8afa41dee6ae723cbc9eea87e5d07b071e52cf113394ba0c6ef
+    region:
+      static: auto # R2 doesn't have traditional regions, 'auto' or 'us-east-1' works.
+    stack:
+      auto: false # Disable AWS CloudFormation stack auto-detection
