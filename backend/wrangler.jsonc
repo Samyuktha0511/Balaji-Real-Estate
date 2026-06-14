@@ -1,0 +1,30 @@
+/**
+ * Cloudflare Worker configuration for the Balaji Real Estate FastAPI backend.
+ * Replace the D1 database_id after creating the production database.
+ */
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "balaji-real-estate",
+	"main": "src/entry.py",
+	"compatibility_date": "2024-11-01",
+	"compatibility_flags": [
+		"python_workers"
+	],
+	"d1_databases": [
+		{
+			"binding": "balaji_real_estate",
+			"database_name": "balaji-real-estate",
+			"database_id": "87d6b56f-b7a6-4790-943a-db460f2d7495",
+			"migrations_dir": "migrations"
+		}
+	],
+	"r2_buckets": [
+		{
+			"binding": "LISTING_MEDIA",
+			"bucket_name": "bre-listing-detail-img"
+		}
+	],
+	"observability": {
+		"enabled": true
+	}
+}
