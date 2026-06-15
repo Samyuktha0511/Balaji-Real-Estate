@@ -1,0 +1,26 @@
+name            = "balaji-realestate-api"
+main            = "src/index.ts"
+compatibility_date  = "2024-09-23"
+compatibility_flags = ["nodejs_compat"]
+
+# ── D1 SQLite Database ────────────────────────────────────────────────────────
+# Run `wrangler d1 create balaji-realestate` and paste the returned
+# database_id below (replace the placeholder).
+[[d1_databases]]
+binding       = "DB"
+database_name = "balaji-realestate"
+database_id   = "f5742374-9f46-4a50-b3a2-9c195df1cd89"
+
+# ── R2 Bucket (media storage) ─────────────────────────────────────────────────
+[[r2_buckets]]
+binding     = "MEDIA"
+bucket_name = "bre-listing-detail-img"
+
+# ── Environment variables ─────────────────────────────────────────────────────
+[vars]
+ALLOWED_ORIGIN = "*"
+
+# ── Local development overrides ───────────────────────────────────────────────
+# These run against your local D1 / R2 simulators (wrangler dev --local)
+[dev]
+port = 8787
