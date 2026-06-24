@@ -1292,6 +1292,126 @@ h3 {
 }
 
 /* =========================================================
+   SELL YOUR PLOT
+   ========================================================= */
+.sell-bg {
+    background: linear-gradient(180deg, var(--cream-100), var(--cream-50));
+}
+
+.sell-card {
+    position: relative;
+    overflow: hidden;
+    background:
+        radial-gradient(circle at 88% 12%, rgba(143, 199, 66, 0.18), transparent 45%),
+        linear-gradient(150deg, var(--white), var(--cream-100));
+    border: 1px solid var(--sand-200);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    padding: clamp(28px, 5vw, 56px);
+}
+
+.sell-card::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 6px;
+    background: linear-gradient(180deg, var(--leaf-500), var(--leaf-700));
+}
+
+.sell-leaf {
+    position: absolute;
+    color: var(--leaf-300);
+    opacity: 0.6;
+    top: 26px;
+    right: 30px;
+    animation: drift 9s ease-in-out infinite;
+}
+
+.sell-leaf.two {
+    top: 64px;
+    right: 70px;
+    animation-delay: 1.4s;
+    opacity: 0.45;
+}
+
+.sell-inner {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 48px;
+    align-items: center;
+}
+
+.sell-copy .section-title {
+    margin-bottom: 6px;
+}
+
+.sell-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 28px;
+}
+
+.sell-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.sell-step {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    background: var(--white);
+    border: 1px solid var(--sand-200);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease), border-color 0.35s var(--ease);
+}
+
+.sell-step:hover {
+    transform: translateX(6px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--leaf-300);
+}
+
+.sell-step-ico {
+    flex-shrink: 0;
+    width: 46px;
+    height: 46px;
+    border-radius: 14px;
+    display: grid;
+    place-items: center;
+    background: linear-gradient(150deg, var(--leaf-100), #d6ebbf);
+    color: var(--leaf-700);
+}
+
+.sell-step-num {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--leaf-700);
+}
+
+.sell-step h4 {
+    font-family: var(--serif);
+    font-size: 1.12rem;
+    color: var(--bark-800);
+    margin: 2px 0 4px;
+}
+
+.sell-step p {
+    font-size: 0.9rem;
+    color: var(--ink-700);
+}
+
+/* =========================================================
    FOOTER
    ========================================================= */
 .footer {
@@ -2038,6 +2158,11 @@ h3 {
 
     .value-grid {
         grid-template-columns: 1fr;
+    }
+
+    .sell-inner {
+        grid-template-columns: 1fr;
+        gap: 32px;
     }
 
     .footer-grid {

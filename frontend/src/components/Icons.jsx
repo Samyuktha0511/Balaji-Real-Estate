@@ -102,3 +102,19 @@ export const Leaf = ({ s = 22 }) => (
         <path d="M21 3s-2 9-9 12C7 17 4 13 4 13s3-2 7-2c-3-1-6 0-6 0s2-8 9-9c3.5-.5 7 1 7 1z" />
     </svg>
 )
+
+export const Sprout = ({ s = 26 }) => (
+    <svg width={s} height={s} viewBox="0 0 24 24" {...base}>
+        <path d="M7 20h10" />
+        <path d="M12 20c0-6 0-8 0-10" />
+        <path d="M12 10C12 7 9.5 4 5 4c0 4.5 3 7 7 7z" />
+        <path d="M12 12c0-2.5 2.5-5 6-5 0 3.5-2.5 6-6 6z" />
+    </svg>
+)
+
+export const Tag = ({ s = 26 }) => (
+    <svg width={s} height={s} viewBox="0 0 24 24" {...base}>
+        <path d="M20.59 13.41 13.42 20.6a2 2 0 0 1-2.83 0L3 13V3h10l7.59 7.59a2 2 0 0 1 0 2.82z" />
+        <circle cx="7.5" cy="7.5" r="1.5" fill="currentColor" stroke="none" />
+    </svg>
+)

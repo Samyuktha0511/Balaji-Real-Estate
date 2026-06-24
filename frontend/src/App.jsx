@@ -5,7 +5,7 @@ import ListingCard from './components/ListingCard'
 import ListingDetail from './components/ListingDetail'
 import {
   Phone, Search, ArrowRight, ChevronUp, Check, Leaf,
-  ShieldLeaf, Handshake, MapPinned, Mail, Pin,
+  ShieldLeaf, Handshake, MapPinned, Mail, Pin, Whatsapp, Sprout, Tag,
 } from './components/Icons'
 import logo from './assets/logo.png'
 import fatherPhotoPlaceholder from './assets/father-photo-placeholder.svg'
@@ -54,6 +54,7 @@ function Navbar() {
         <div className="nav-links">
           <a className="nav-link" href="#why">Why us</a>
           <a className="nav-link" href="#plots">Plots</a>
+          <a className="nav-link" href="#sell">Sell a plot</a>
           <a className="nav-link" href="#about">About</a>
           <a className="nav-cta" href="#about"><Phone s={15} /> Get in touch</a>
         </div>
@@ -332,6 +333,52 @@ function About() {
   )
 }
 
+/* ── Sell your plot invitation ────────────────────────────── */
+function SellPlot() {
+  const steps = [
+    { icon: <Phone s={20} />, title: 'Reach out', text: 'Call or message with a few basic details about your plot.' },
+    { icon: <MapPinned s={20} />, title: 'Free assessment', text: 'Get an honest, local view of your plot’s value and demand.' },
+    { icon: <Handshake s={20} />, title: 'Find the right buyer', text: 'We connect you with genuine, verified buyers — no pressure.' },
+  ]
+  return (
+    <section className="section sell-bg" id="sell">
+      <div className="container">
+        <div className="sell-card reveal">
+          <div className="sell-leaf" aria-hidden="true"><Leaf s={22} /></div>
+          <div className="sell-leaf two" aria-hidden="true"><Leaf s={16} /></div>
+          <div className="sell-inner">
+            <div className="sell-copy">
+              <span className="section-eyebrow">Have land to sell?</span>
+              <h2 className="section-title">Sell your plot with someone you can trust</h2>
+              <p className="section-lead">
+                Looking to sell your plot in Coimbatore? Murugesan K will personally guide
+                you — from a fair valuation to connecting you with serious, verified buyers.
+                Honest advice, clear communication and over two decades of local know-how.
+              </p>
+              <div className="sell-actions">
+                <a className="btn-primary" href="tel:+91"><Phone s={16} /> Call to list your plot</a>
+                <a className="btn-ghost" href="https://wa.me/91" target="_blank" rel="noreferrer"><Whatsapp s={16} /> Message on WhatsApp</a>
+              </div>
+            </div>
+            <div className="sell-steps">
+              {steps.map((s, i) => (
+                <div className="sell-step" key={s.title}>
+                  <span className="sell-step-ico">{s.icon}</span>
+                  <div>
+                    <div className="sell-step-num">Step {i + 1}</div>
+                    <h4>{s.title}</h4>
+                    <p>{s.text}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
 /* ── Footer ───────────────────────────────────────────────── */
 function Footer() {
   return (
@@ -410,6 +457,7 @@ function Home() {
       <Hero count={listings.length} loading={loading} />
       <WhyUs />
       <Listings listings={listings} loading={loading} />
+      <SellPlot />
       <About />
       <Footer />
       <BackToTop />
