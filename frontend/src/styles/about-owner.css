@@ -37,9 +37,17 @@
   aspect-ratio: 4 / 5;
   overflow: hidden;
   border-radius: var(--radius-lg);
-  border: 1px solid rgba(30, 120, 34, 0.14);
+  border: 1px solid var(--earth-line);
   background: var(--surface);
-  box-shadow: var(--shadow);
+  box-shadow: var(--shadow-earth);
+  outline: 6px solid rgba(102, 64, 26, 0.06);
+  outline-offset: 0;
+  transition: transform 0.4s var(--ease-smooth), box-shadow 0.4s ease;
+}
+
+.about-owner-photo:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 26px 56px rgba(102, 64, 26, 0.22);
 }
 
 .about-owner-photo img {

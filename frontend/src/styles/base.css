@@ -3,17 +3,31 @@
    ============================================ */
 
 :root {
-  /* Brand palette: natural greens (from logo) lead, clean cream/stone neutrals */
-  --navy: #1e7822;
+  /* ── Brand palette ────────────────────────────────────────────
+     Pulled directly from the logo:
+       • deep forest green  #1e7822  (leaves)
+       • fresh lime green   #5aa916  (highlight leaves)
+       • earthy brown       #66401a  (trunk / soil — warmth accent)
+     Greens lead; warm brown grounds the brand; cream/stone neutrals. */
+  --navy: #1e7822;          /* primary green (kept name for compatibility) */
   --navy-700: #185f1b;
-  --ink: #1b2a1f;
+  --green-deep: #11491a;
+
+  /* Earth / brown accent — the warm signature pulled from the logo */
+  --earth: #66401a;
+  --earth-dark: #4a2d11;
+  --earth-soft: #f3ebe0;
+  --earth-line: #e4d6c4;
+
+  --ink: #1f2a1d;
   --slate: #586256;
   --muted: #8a948a;
-  --line: #e5e9e1;
-  --line-soft: #eef1ea;
+  --line: #e7e6df;
+  --line-soft: #f0efe8;
   --surface: #ffffff;
-  --bg: #f6f8f2;
-  --bg-tint: #eaefe2;
+  --surface-2: #fbfaf6;
+  --bg: #f7f6f0;          /* warm off-white, ties to the earth tone */
+  --bg-tint: #eef1e6;
   --gold: #6cba1f;
   --gold-dark: #3d8a12;
   --gold-soft: #ebf5dc;
@@ -23,13 +37,23 @@
   --danger-soft: #fae6e3;
   --whatsapp: #25d366;
 
-  --radius-sm: 8px;
-  --radius: 14px;
-  --radius-lg: 20px;
+  /* Signature gradients */
+  --grad-brand: linear-gradient(135deg, #1e7822 0%, #5aa916 100%);
+  --grad-hero: linear-gradient(160deg, #1e7822 0%, #11491a 60%, #3a2d18 100%);
+  --grad-earth: linear-gradient(135deg, #66401a 0%, #8a5a28 100%);
 
-  --shadow-sm: 0 1px 2px rgba(27, 60, 35, 0.06), 0 1px 3px rgba(27, 60, 35, 0.05);
-  --shadow: 0 6px 20px rgba(27, 60, 35, 0.1);
-  --shadow-lg: 0 18px 50px rgba(27, 60, 35, 0.16);
+  --radius-sm: 10px;
+  --radius: 16px;
+  --radius-lg: 22px;
+  --radius-xl: 28px;
+
+  --shadow-sm: 0 1px 2px rgba(31, 42, 29, 0.06), 0 2px 6px rgba(31, 42, 29, 0.05);
+  --shadow: 0 8px 24px rgba(31, 42, 29, 0.1);
+  --shadow-lg: 0 24px 60px rgba(31, 42, 29, 0.16);
+  --shadow-earth: 0 18px 44px rgba(102, 64, 26, 0.16);
+
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
 
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-serif: 'Fraunces', Georgia, 'Times New Roman', serif;
@@ -41,16 +65,33 @@
 
 html {
   background: var(--bg);
+  scroll-behavior: smooth;
 }
 
 body {
   font-family: var(--font-sans);
   margin: 0;
   padding: 0;
-  background: var(--bg);
+  background:
+    radial-gradient(120% 80% at 100% 0%, rgba(90, 169, 22, 0.06) 0%, rgba(90, 169, 22, 0) 42%),
+    radial-gradient(90% 60% at 0% 8%, rgba(102, 64, 26, 0.05) 0%, rgba(102, 64, 26, 0) 38%),
+    var(--bg);
   color: var(--ink);
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   line-height: 1.6;
+  text-rendering: optimizeLegibility;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+}
+
+/* Shared fade-up entrance used across sections */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 a {

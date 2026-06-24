@@ -66,8 +66,22 @@
 }
 
 .price-box {
-  background: linear-gradient(150deg, var(--navy) 0%, #11491a 100%);
+  background: var(--grad-hero);
   border-color: transparent;
+  box-shadow: var(--shadow-earth);
+  overflow: hidden;
+}
+
+.price-box::after {
+  content: '';
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  right: -30px;
+  bottom: -50px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(90, 169, 22, 0.5) 0%, rgba(90, 169, 22, 0) 70%);
+  pointer-events: none;
 }
 
 .price-box .label,

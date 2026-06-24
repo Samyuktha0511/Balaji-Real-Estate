@@ -133,10 +133,13 @@ function Lightbox({ photos, title, startIndex, onClose }) {
 }
 
 /* ── Main Gallery Component ─────────────────────────────────────────────── */
+const AUTOPLAY_MS = 5000
+
 export default function PhotoGallery({ photos, title }) {
   const [activeIndex, setActiveIndex] = useState(0)
   const [lightboxOpen, setLightboxOpen] = useState(false)
   const [isDragging, setIsDragging] = useState(false)
+  const [isPaused, setIsPaused] = useState(false)
   const touchStartX = useRef(null)
   const touchEndX   = useRef(null)
 
@@ -148,6 +151,15 @@ export default function PhotoGallery({ photos, title }) {
 
   const prev = useCallback(() => goTo(activeIndex - 1), [activeIndex, goTo])
   const next = useCallback(() => goTo(activeIndex + 1), [activeIndex, goTo])
+
+  // Autoplay — advances slides, paused on hover / touch / lightbox / reduced-motion
+  useEffect(() => {
+    if (lightboxOpen || isPaused || total <= 1) return
+    const prefersReduced = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
+    if (prefersReduced) return
+    const timer = setInterval(next, AUTOPLAY_MS)
+    return () => clearInterval(timer)
+  }, [lightboxOpen, isPaused, total, next])
 
   // Keyboard navigation (only when lightbox is closed)
   useEffect(() => {
@@ -165,17 +177,19 @@ export default function PhotoGallery({ photos, title }) {
     touchStartX.current = e.touches[0].clientX
     touchEndX.current   = null
     setIsDragging(false)
+    setIsPaused(true)
   }
   const onTouchMove = (e) => {
     touchEndX.current = e.touches[0].clientX
     if (Math.abs(touchStartX.current - e.touches[0].clientX) > 10) setIsDragging(true)
   }
   const onTouchEnd = () => {
-    if (!touchStartX.current || !touchEndX.current) return
+    if (!touchStartX.current || !touchEndX.current) { setIsPaused(false); return }
     const diff = touchStartX.current - touchEndX.current
     if (Math.abs(diff) > 50) diff > 0 ? next() : prev()
     touchStartX.current = null
     touchEndX.current   = null
+    setIsPaused(false)
   }
 
   // Empty state
@@ -200,6 +214,8 @@ export default function PhotoGallery({ photos, title }) {
           onTouchStart={onTouchStart}
           onTouchMove={onTouchMove}
           onTouchEnd={onTouchEnd}
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
         >
           <div
             className="gallery-track"
@@ -217,6 +233,20 @@ export default function PhotoGallery({ photos, title }) {
               </div>
             ))}
           </div>
+
+          {/* Autoplay progress bar */}
+          {total > 1 && !lightboxOpen && (
+            <div className="gallery-progress" aria-hidden="true">
+              <div
+                key={activeIndex}
+                className="gallery-progress-bar"
+                style={{
+                  animationDuration: `${AUTOPLAY_MS}ms`,
+                  animationPlayState: isPaused ? 'paused' : 'running',
+                }}
+              />
+            </div>
+          )}
 
           {/* Prev / Next arrows */}
           {total > 1 && (

@@ -45,7 +45,7 @@ function Home() {
 
         <div className="hero">
           <span className="hero-eyebrow">Premium Plot Resale</span>
-          <h1>Find your perfect plot in Coimbatore</h1>
+          <h1>Find your <em>perfect plot</em> in Coimbatore</h1>
           <p>Hand-picked, verified plot resale listings with real photos, end-to-end support and guidance.</p>
 
           <div className="hero-stats">
