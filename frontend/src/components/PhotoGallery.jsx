@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react'
 import { createPortal } from 'react-dom'
+import logoMark from '../assets/logo.png'
 
 /* ── Small inline SVGs ─────────────────────────────────────────────────── */
 function ChevronLeft() {
@@ -50,9 +51,9 @@ function Lightbox({ photos, title, startIndex, onClose }) {
   // Keyboard inside lightbox
   useEffect(() => {
     const onKey = (e) => {
-      if (e.key === 'ArrowLeft')  prev()
+      if (e.key === 'ArrowLeft') prev()
       if (e.key === 'ArrowRight') next()
-      if (e.key === 'Escape')     onClose()
+      if (e.key === 'Escape') onClose()
     }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
@@ -67,7 +68,7 @@ function Lightbox({ photos, title, startIndex, onClose }) {
   // Touch swipe inside lightbox
   const touchX = useRef(null)
   const handleTouchStart = (e) => { touchX.current = e.touches[0].clientX }
-  const handleTouchEnd   = (e) => {
+  const handleTouchEnd = (e) => {
     if (touchX.current === null) return
     const diff = touchX.current - e.changedTouches[0].clientX
     if (Math.abs(diff) > 50) diff > 0 ? next() : prev()
@@ -141,7 +142,7 @@ export default function PhotoGallery({ photos, title }) {
   const [isDragging, setIsDragging] = useState(false)
   const [isPaused, setIsPaused] = useState(false)
   const touchStartX = useRef(null)
-  const touchEndX   = useRef(null)
+  const touchEndX = useRef(null)
 
   const total = photos?.length ?? 0
 
@@ -165,7 +166,7 @@ export default function PhotoGallery({ photos, title }) {
   useEffect(() => {
     if (lightboxOpen) return
     const onKey = (e) => {
-      if (e.key === 'ArrowLeft')  prev()
+      if (e.key === 'ArrowLeft') prev()
       if (e.key === 'ArrowRight') next()
     }
     window.addEventListener('keydown', onKey)
@@ -175,7 +176,7 @@ export default function PhotoGallery({ photos, title }) {
   // Touch / swipe handlers
   const onTouchStart = (e) => {
     touchStartX.current = e.touches[0].clientX
-    touchEndX.current   = null
+    touchEndX.current = null
     setIsDragging(false)
     setIsPaused(true)
   }
@@ -188,17 +189,21 @@ export default function PhotoGallery({ photos, title }) {
     const diff = touchStartX.current - touchEndX.current
     if (Math.abs(diff) > 50) diff > 0 ? next() : prev()
     touchStartX.current = null
-    touchEndX.current   = null
+    touchEndX.current = null
     setIsPaused(false)
   }
 
-  // Empty state
+  // Empty state — branded colored grid filling the same 4:3 window
   if (!photos || total === 0) {
     return (
       <div className="photo-gallery">
-        <div className="no-photos">
-          <span className="no-photos-emoji">🏞️</span>
-          <p>No photos available</p>
+        <div className="gallery-empty">
+          <div className="gallery-empty-grid" aria-hidden="true" />
+          <div className="gallery-empty-inner">
+            <img src={logoMark} alt="" className="gallery-empty-mark" />
+            <p>Photos coming soon</p>
+            <span>{title}</span>
+          </div>
         </div>
       </div>
     )

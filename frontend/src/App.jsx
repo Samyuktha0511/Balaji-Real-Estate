@@ -3,11 +3,11 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import axios from 'axios'
 import ListingCard from './components/ListingCard'
 import ListingDetail from './components/ListingDetail'
-import Logo from './components/Logo'
 import {
   Phone, Search, ArrowRight, ChevronUp, Check, Leaf,
   ShieldLeaf, Handshake, MapPinned, Mail, Pin,
 } from './components/Icons'
+import logo from './assets/logo.png'
 import fatherPhotoPlaceholder from './assets/father-photo-placeholder.svg'
 
 /* Reveal-on-scroll: adds .in when an element enters the viewport */
@@ -45,7 +45,7 @@ function Navbar() {
     <nav className={`nav ${scrolled ? 'scrolled' : ''}`}>
       <div className="nav-inner">
         <a className="brand" href="#top">
-          <span className="brand-logo"><Logo size={44} /></span>
+          <span className="brand-logo"><img src={logo} width={44} height={44} alt="Balaji Real Estate logo" /></span>
           <span className="brand-text">
             <span className="brand-name">Balaji Real Estate</span>
             <span className="brand-sub">Rooted in Coimbatore</span>
@@ -64,6 +64,16 @@ function Navbar() {
 
 /* ── Hero ─────────────────────────────────────────────────── */
 function Hero({ count, loading }) {
+  const [tilt, setTilt] = useState({ x: 0, y: 0 })
+
+  const onMove = (e) => {
+    const r = e.currentTarget.getBoundingClientRect()
+    const px = (e.clientX - r.left) / r.width - 0.5
+    const py = (e.clientY - r.top) / r.height - 0.5
+    setTilt({ x: py * -10, y: px * 14 })
+  }
+  const reset = () => setTilt({ x: 0, y: 0 })
+
   return (
     <header className="hero" id="top">
       <div className="hero-inner">
@@ -97,17 +107,33 @@ function Hero({ count, loading }) {
           </div>
         </div>
 
-        <div className="hero-art" aria-hidden="true">
-          <div className="hero-orb" />
-          <span className="leaf-float" style={{ top: '18%', left: '14%', '--d': '8s' }}><Leaf s={26} /></span>
-          <span className="leaf-float" style={{ bottom: '22%', left: '8%', '--d': '11s', '--delay': '1.5s' }}><Leaf s={18} /></span>
-          <span className="leaf-float" style={{ top: '26%', right: '12%', '--d': '9.5s', '--delay': '0.8s' }}><Leaf s={20} /></span>
-          <Logo className="hero-tree" size={260} />
-          <div className="hero-chip c1">
+        <div className="hero-art" onMouseMove={onMove} onMouseLeave={reset}>
+          <div className="hero-glow" aria-hidden="true" />
+          <span className="leaf-float lf1" aria-hidden="true"><Leaf s={24} /></span>
+          <span className="leaf-float lf2" aria-hidden="true"><Leaf s={16} /></span>
+          <span className="leaf-float lf3" aria-hidden="true"><Leaf s={19} /></span>
+
+          <div
+            className="hero-signboard"
+            style={{ transform: `rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)` }}
+          >
+            <div className="board-face">
+              <span className="board-tag">For sale · plots</span>
+              <img className="board-logo" src={logo} alt="Balaji Real Estate logo" />
+              <span className="board-name">Balaji Real Estate</span>
+              <span className="board-sub">Rooted in Coimbatore</span>
+            </div>
+            <span className="board-bolt tl" /><span className="board-bolt tr" />
+            <span className="board-bolt bl" /><span className="board-bolt br" />
+            <div className="board-post" />
+            <div className="board-ground" />
+          </div>
+
+          <div className="hero-chip c1" style={{ transform: `translate(${tilt.y * 0.6}px, ${tilt.x * -0.6}px)` }}>
             <span className="ico"><ShieldLeaf s={18} /></span>
             Verified land titles
           </div>
-          <div className="hero-chip c2">
+          <div className="hero-chip c2" style={{ transform: `translate(${tilt.y * -0.8}px, ${tilt.x * 0.8}px)` }}>
             <span className="ico"><MapPinned s={18} /></span>
             Prime Coimbatore zones
           </div>
@@ -314,7 +340,7 @@ function Footer() {
         <div className="footer-grid">
           <div className="footer-brand">
             <a className="brand" href="#top">
-              <span className="brand-logo"><Logo size={44} /></span>
+              <span className="brand-logo"><img src={logo} width={44} height={44} alt="Balaji Real Estate logo" /></span>
               <span className="brand-text">
                 <span className="brand-name">Balaji Real Estate</span>
                 <span className="brand-sub">Rooted in Coimbatore</span>

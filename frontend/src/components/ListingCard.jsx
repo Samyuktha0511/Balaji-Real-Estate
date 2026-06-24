@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { Pin, Phone, Whatsapp, Mail, ArrowRight } from './Icons'
+import logo from '../assets/logo.png'
 
 export default function ListingCard({ listing }) {
   const firstPhoto = listing.photos && listing.photos.length > 0
@@ -16,7 +17,10 @@ export default function ListingCard({ listing }) {
         {firstPhoto ? (
           <img src={firstPhoto} alt={listing.title} loading="lazy" />
         ) : (
-          <div className="no-photos"><span className="no-photos-emoji">🏞️</span></div>
+          <div className="lcard-noimg">
+            <img src={logo} alt="" className="lcard-noimg-mark" />
+            <span>Photos coming soon</span>
+          </div>
         )}
         <span className={`lcard-badge ${status}`}>{status.toUpperCase()}</span>
         {listing.area && <span className="lcard-area">{listing.area} sq.ft</span>}
