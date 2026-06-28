@@ -21,7 +21,15 @@
 
 ## 2. Technology Stack
 
-### Backend
+### Backend (Active — TypeScript Cloudflare Worker)
+- **Runtime:** Cloudflare Workers (workerd, run locally via Wrangler)
+- **Language:** TypeScript 5.5
+- **Router:** itty-router v5 (AutoRouter with built-in CORS)
+- **Database:** Cloudflare D1 (SQLite)
+- **Media Storage:** Cloudflare R2 (object storage)
+- **Tooling:** Wrangler 3.x (local dev simulators for D1 + R2, deploy)
+
+### Backend (Legacy — retained under `backend/`)
 - **Framework:** Spring Boot 3.1.4 (Java 17)
 - **Build Tool:** Maven 3.9.2 (via Maven Wrapper - mvnw.cmd)
 - **Database:** PostgreSQL 15
@@ -31,6 +39,7 @@
   - Jackson (JSON serialization)
   - PostgreSQL JDBC Driver 42.6.0
   - Spring Data JPA
+- _Note: superseded by the TypeScript Worker; kept for reference only._
 
 ### Frontend
 - **Framework:** React 18.2.0
@@ -40,21 +49,23 @@
 - **Styling:** Vanilla CSS (responsive, no framework needed)
 
 ### DevOps & Infrastructure
-- **Containerization:** Docker + Docker Compose
-- **Services:**
+- **Active backend:** Cloudflare Worker (Wrangler local dev / Cloudflare deploy)
+- **Legacy backend services (Docker):**
   - PostgreSQL 15 container (port 5432)
   - pgAdmin 4 container (port 8081)
 - **Local Development Ports:**
-  - Backend API: `http://localhost:8080`
+  - Worker API (active): `http://localhost:8787`
   - Frontend Dev Server: `http://localhost:3000`
-  - pgAdmin: `http://localhost:8081`
-  - PostgreSQL: `localhost:5432`
+  - Legacy Spring Boot API: `http://localhost:8080`
+  - Legacy pgAdmin: `http://localhost:8081`
+  - Legacy PostgreSQL: `localhost:5432`
+- **Frontend → backend wiring:** Vite proxies `/api` to `http://localhost:8787` (the Worker).
 
 ### Deployment Considerations
-- Maven wrapper eliminates global Maven dependency
-- Dockerfile provided for backend containerization
-- Docker Compose for local development
-- File storage: Local filesystem (uploads/) - switchable to S3 in future
+- Worker deploys to Cloudflare via `wrangler deploy` (`npm run deploy`)
+- D1 schema applied via `wrangler d1 execute` (`npm run db:migrate` / `db:migrate:remote`)
+- Media stored in Cloudflare R2 (no local filesystem dependency)
+- Legacy path: Maven wrapper + Dockerfile + Docker Compose, local `uploads/` storage
 
 ---
 
@@ -82,22 +93,36 @@ Balaji Real Estate/
 │       │       └── ListingController.java
 │       └── resources/
 │           └── application.yml          (Spring Boot config)
+├── worker/                              (ACTIVE backend — TypeScript Cloudflare Worker)
+│   ├── package.json                     (dev / deploy / db:migrate scripts)
+│   ├── tsconfig.json
+│   ├── wrangler.toml                    (Worker config: D1 + R2 bindings, dev port 8787)
+│   └── src/
+│       ├── index.ts                     (Worker entry: AutoRouter + routes + CORS)
+│       ├── cors.ts                      (CORS / error response helpers)
+│       ├── types.ts                     (Env bindings, Listing types)
+│       ├── db/
+│       │   └── schema.sql               (D1 / SQLite schema)
+│       └── handlers/
+│           ├── listings.ts              (CRUD handlers for listings)
+│           └── media.ts                 (R2 upload + media serving)
 ├── frontend/
 │   ├── package.json
-│   ├── vite.config.js                   (Vite + React plugin + API proxy)
+│   ├── vite.config.js                   (Vite + React plugin + API proxy → :8787)
 │   ├── index.html
 │   └── src/
 │       ├── main.jsx
 │       ├── App.jsx                      (Main router component)
-│       ├── styles.css                   (Global & component styles)
+│       ├── styles/                      (Modular CSS — design system + sections)
 │       └── components/
 │           ├── ListingCard.jsx          (Grid card for homepage)
 │           ├── ListingDetail.jsx        (Detail page with full info)
-│           └── PhotoGallery.jsx         (Carousel with thumbnails)
-├── docker-compose.yml                   (Postgres + pgAdmin)
+│           ├── PhotoGallery.jsx         (Carousel with thumbnails + lightbox)
+│           └── Logo.jsx                 (Inline SVG brand mark)
+├── docker-compose.yml                   (Legacy: Postgres + pgAdmin)
 ├── .gitignore
 ├── README.md
-├── uploads/                             (Media file storage)
+├── uploads/                             (Legacy media file storage)
 ├── PROJECT_CONTEXT.md                   (This file)
 └── test-listing.json                    (Sample test data)
 ```
@@ -317,7 +342,56 @@ Response: 200 OK
 
 ## 8. Configuration & Environment
 
-### Backend Configuration (application.yml)
+## 8. Configuration & Environment
+
+### Active Backend Configuration (worker/wrangler.toml)
+```toml
+name                = "balaji-realestate-api"
+main                = "src/index.ts"
+compatibility_date  = "2024-09-23"
+compatibility_flags = ["nodejs_compat"]
+
+[[d1_databases]]            # Cloudflare D1 (SQLite)
+binding       = "DB"
+database_name = "balaji-realestate"
+database_id   = "<your-d1-database-id>"
+
+[[r2_buckets]]             # Cloudflare R2 (media storage)
+binding     = "MEDIA"
+bucket_name = "bre-listing-detail-img"
+
+[vars]
+ALLOWED_ORIGIN = "*"
+
+[dev]
+port = 8787                # local wrangler dev port
+```
+
+### Running the Worker locally
+```bash
+cd worker
+npm install
+npm run db:migrate   # one-time: apply schema.sql to the local D1 database
+npm run dev          # wrangler dev → http://localhost:8787
+```
+- `wrangler dev` runs local simulators for D1 and R2 — no Cloudflare account needed for dev.
+- If `db:migrate` prompts for local vs remote, choose local, or run:
+  `wrangler d1 execute balaji-realestate --local --file=src/db/schema.sql`
+
+### Frontend Configuration (vite.config.js)
+```javascript
+export default {
+  plugins: [react()],
+  server: {
+    port: 3000,
+    proxy: {
+      '/api': 'http://localhost:8787'   // proxied to the Worker
+    }
+  }
+}
+```
+
+### Legacy Backend Configuration (application.yml)
 ```yaml
 spring:
   datasource:
@@ -334,21 +408,6 @@ server:
 
 file:
   upload-dir: uploads
-```
-
-### Frontend Configuration (vite.config.js)
-```javascript
-export default {
-  plugins: [react()],
-  server: {
-    proxy: {
-      '/api': {
-        target: 'http://localhost:8080',
-        changeOrigin: true
-      }
-    }
-  }
-}
 ```
 
 ### Docker Compose Configuration

@@ -25,14 +25,16 @@
 }
 
 .btn-primary {
-  background: var(--navy);
+  background: var(--grad-brand);
   color: #fff;
   flex: 1;
+  box-shadow: 0 6px 16px rgba(30, 120, 34, 0.22);
 }
 
 .btn-primary:hover {
-  background: var(--navy-700);
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(30, 120, 34, 0.3);
+  filter: brightness(1.04);
 }
 
 .btn-call {
@@ -86,10 +88,11 @@
 }
 
 .btn-contact:hover {
-  background: var(--navy);
+  background: var(--grad-brand);
   color: #fff;
-  border-color: var(--navy);
+  border-color: transparent;
   transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(30, 120, 34, 0.28);
 }
 
 .back-btn {

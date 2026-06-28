@@ -20,6 +20,19 @@ main {
   font-size: 1.7rem;
   margin: 0;
   color: var(--ink);
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.section-head h2::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 48px;
+  height: 3px;
+  border-radius: 3px;
+  background: var(--grad-brand);
 }
 
 .section-head .count {
