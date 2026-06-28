@@ -275,7 +275,7 @@ function Listings({ listings, loading }) {
         ) : (
           <div className="listings-grid">
             {visible.map((listing, i) => (
-              <div className="reveal" style={{ transitionDelay: `${Math.min(i, 6) * 70}ms` }} key={listing.id}>
+              <div className="lcard-enter" style={{ animationDelay: `${Math.min(i, 8) * 60}ms` }} key={listing.id}>
                 <ListingCard listing={listing} />
               </div>
             ))}

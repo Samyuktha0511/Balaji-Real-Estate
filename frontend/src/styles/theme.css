@@ -895,6 +895,24 @@ h3 {
     gap: 28px;
 }
 
+/* Per-card entrance — replays on every filter/sort change (no observer needed) */
+.lcard-enter {
+    opacity: 0;
+    animation: cardIn 0.5s var(--ease) forwards;
+}
+
+@keyframes cardIn {
+    from {
+        opacity: 0;
+        transform: translateY(22px);
+    }
+
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
 /* ---------- Listing card ---------- */
 .lcard {
     background: var(--white);
@@ -2212,6 +2230,11 @@ h3 {
     }
 
     .reveal {
+        opacity: 1;
+        transform: none;
+    }
+
+    .lcard-enter {
         opacity: 1;
         transform: none;
     }
